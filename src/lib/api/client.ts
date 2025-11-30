@@ -2,7 +2,7 @@ import { getAccessToken } from "./token";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
-async function apiFetch<T>(
+export async function apiFetch<T>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
@@ -19,10 +19,11 @@ async function apiFetch<T>(
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      window.location.href = "/login";
+    }
     throw new Error(`API error: ${res.status}`);
   }
 
   return res.json() as Promise<T>;
 }
-
-export { apiFetch };
