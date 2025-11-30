@@ -48,72 +48,79 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(45,212,191,0.07),transparent_25%),radial-gradient(circle_at_80%_10%,rgba(14,165,233,0.1),transparent_30%),radial-gradient(circle_at_60%_80%,rgba(52,211,153,0.07),transparent_30%)]" />
+    <main className="relative min-h-screen overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.05),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.04),transparent_35%),radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05),transparent_35%)]" />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-10 space-y-8">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-medium text-teal-200/80">
-              {ownerName ? `Hi ${ownerName}` : "Dashboard"}
-            </p>
-            <h1 className="text-3xl font-semibold text-white">Your accounts</h1>
-            <p className="mt-1 text-slate-200/80">
-              Live balances pulled straight from the API.
+      <div className="relative mx-auto max-w-6xl px-4 md:px-8 py-10 space-y-8">
+        <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-right">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold border border-white/20 backdrop-blur">
+              <span className="inline-block h-2 w-2 rounded-full bg-amber-300 animate-pulse" />
+              {ownerName ? `שלום, ${ownerName}` : "ברוכים הבאים"}
+            </div>
+            <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">הדשבורד שלכם</h1>
+            <p className="text-purple-100/80 text-sm md:text-base">
+              מעקב חי אחר יתרות, חשבונות והעברות בבנק השחר.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap justify-end gap-3">
             <button
               onClick={() => router.push("/transfers")}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-teal-900/40 transition hover:scale-[1.01]"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-700 via-rose-600 to-amber-400 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-purple-900/40 transition hover:scale-[1.01]"
             >
-              New transfer
+              העברה חדשה
+            </button>
+            <button
+              onClick={() => router.push("/accounts")}
+              className="rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-purple-100 transition hover:bg-white/10"
+            >
+              ניהול חשבונות
             </button>
             <button
               onClick={handleLogout}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-purple-100 transition hover:bg-white/10"
             >
-              Logout
+              יציאה
             </button>
           </div>
         </header>
 
-        <section className="rounded-3xl border border-white/5 bg-white/5 p-6 shadow-inner shadow-slate-900/40">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-inner shadow-purple-950/30 text-right backdrop-blur">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm text-slate-200/80">Total balance</p>
+              <p className="text-sm text-purple-100/75">יתרה כוללת</p>
               {totalBalance ? (
                 <p className="text-3xl font-semibold text-white">
-                  {new Intl.NumberFormat("en-US", {
+                  {new Intl.NumberFormat("he-IL", {
                     style: "currency",
                     currency: totalBalance.currency,
                   }).format(totalBalance.amount)}
                 </p>
               ) : (
                 <p className="text-2xl font-semibold text-white">
-                  {loading ? "Loading..." : "No accounts yet"}
+                  {loading ? "טוען..." : "אין חשבונות עדיין"}
                 </p>
               )}
             </div>
-            <div className="flex gap-2 text-xs text-slate-200/80">
+            <div className="flex flex-wrap gap-2 text-xs text-purple-100/80 justify-end">
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                Synced now
+                סנכרון עכשיו
               </span>
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                {accounts.length} account{accounts.length === 1 ? "" : "s"}
+                {accounts.length} חשבון{accounts.length === 1 ? "" : "ות"}
               </span>
             </div>
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/5 bg-white/5 p-6 shadow-inner shadow-slate-900/40">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-inner shadow-purple-950/30 text-right backdrop-blur">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-white">Accounts</h2>
+            <h2 className="text-lg font-semibold text-white">חשבונות</h2>
             <button
               onClick={() => router.push("/accounts")}
-              className="text-sm font-semibold text-teal-200 hover:text-teal-100"
+              className="text-sm font-semibold text-amber-200 hover:text-amber-100"
             >
-              Manage
+              צפייה בכל החשבונות
             </button>
           </div>
 
@@ -126,26 +133,24 @@ export default function DashboardPage() {
           {loading ? (
             <div className="mt-4 space-y-3">
               {[1, 2, 3].map((item) => (
-                <div
-                  key={item}
-                  className="h-16 animate-pulse rounded-2xl bg-white/10"
-                />
+                <div key={item} className="h-16 animate-pulse rounded-2xl bg-white/10" />
               ))}
             </div>
           ) : accounts.length ? (
-            <div className="mt-4 divide-y divide-white/5 rounded-2xl border border-white/10 bg-white/5">
+            <div className="mt-4 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/5">
               {accounts.map((account) => (
                 <div
                   key={account.id}
                   className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <p className="text-sm font-semibold text-white">Account #{account.id}</p>
-                    <p className="text-xs text-slate-200/80">
-                      Currency: {account.currency} · Owner: {account.owner}
+                  <div className="text-right">
+                    <p className="text-sm font-semibold text-white">חשבון #{account.id}</p>
+                    <p className="text-xs text-purple-100/80">
+                      מטבע: {account.currency} · בעלים: {account.owner}
                     </p>
-                    <p className="text-xs text-slate-200/60">
-                      Created: {new Date(account.created_at).toLocaleString("en-IL", {
+                    <p className="text-xs text-purple-100/70">
+                      נוצר:{" "}
+                      {new Date(account.created_at).toLocaleString("he-IL", {
                         dateStyle: "medium",
                         timeStyle: "short",
                         timeZone: "Asia/Jerusalem",
@@ -153,7 +158,7 @@ export default function DashboardPage() {
                     </p>
                   </div>
                   <p className="text-xl font-semibold text-white">
-                    {new Intl.NumberFormat("en-US", {
+                    {new Intl.NumberFormat("he-IL", {
                       style: "currency",
                       currency: account.currency || "USD",
                     }).format(account.balance)}
@@ -162,8 +167,8 @@ export default function DashboardPage() {
               ))}
             </div>
           ) : (
-            <div className="mt-4 rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-6 text-sm text-slate-200/80">
-              No accounts found yet. Create one to see your balance.
+            <div className="mt-4 rounded-2xl border border-dashed border-white/15 bg-white/5 px-4 py-6 text-sm text-purple-100/80">
+              אין חשבונות עדיין. פתחו חשבון חדש כדי לראות יתרות.
             </div>
           )}
         </section>

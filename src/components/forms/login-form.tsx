@@ -47,12 +47,12 @@ function LoginFormInner() {
     setSuccess(false);
 
     if (!loginPayload.username) {
-      setError("Username is required.");
+      setError("יש להזין שם משתמש.");
       return;
     }
 
     if (loginPayload.password.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setError("סיסמה חייבת להכיל לפחות 6 תווים.");
       return;
     }
 
@@ -64,8 +64,8 @@ function LoginFormInner() {
     } catch (err) {
       const message =
         err instanceof Error
-          ? `Login failed (${err.message})`
-          : "Unable to sign in. Please try again.";
+          ? `התחברות נכשלה (${err.message})`
+          : "לא הצלחנו להתחבר. נסו שוב.";
       setError(message);
     } finally {
       setIsSubmitting(false);
@@ -75,13 +75,13 @@ function LoginFormInner() {
   return (
     <AuthFormShell
       onSubmit={handleSubmit}
-      eyebrow="Sign in"
-      title="Welcome back"
-      description="Securely access your account to manage balances, cards, and transfers."
+      eyebrow="כניסה לחשבון"
+      title="ברוכים השבים לבנק השחר"
+      description="התחברו בקלות כדי לנהל יתרות, כרטיסים והעברות במקום אחד."
       fields={
         <>
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Username</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>שם משתמש</span>
             <input
               type="text"
               autoComplete="username"
@@ -89,13 +89,13 @@ function LoginFormInner() {
               onChange={(event) =>
                 setLoginPayload((prev) => ({ ...prev, username: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
-              placeholder="your username"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
+              placeholder="הקלידו שם משתמש"
             />
           </label>
 
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Password</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>סיסמה</span>
             <input
               type="password"
               autoComplete="current-password"
@@ -103,7 +103,7 @@ function LoginFormInner() {
               onChange={(event) =>
                 setLoginPayload((prev) => ({ ...prev, password: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
               placeholder="••••••••"
             />
           </label>
@@ -111,14 +111,12 @@ function LoginFormInner() {
       }
     >
       {error && (
-        <p className="relative mt-4 text-sm font-medium text-rose-200">
-          {error}
-        </p>
+        <p className="relative mt-4 text-sm font-medium text-rose-200 text-right">{error}</p>
       )}
 
       {success && (
-        <p className="relative mt-4 text-sm font-medium text-emerald-200">
-          You&apos;re in! We&apos;ll redirect you to your dashboard shortly.
+        <p className="relative mt-4 text-sm font-medium text-emerald-200 text-right">
+          התחברתם בהצלחה! מיד תעברו לחשבון שלכם.
         </p>
       )}
 
@@ -126,16 +124,16 @@ function LoginFormInner() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="relative inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-teal-900/40 transition hover:scale-[1.01] hover:shadow-xl hover:shadow-teal-900/50 disabled:cursor-not-allowed disabled:opacity-70"
+          className="relative inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-700 via-rose-600 to-amber-400 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-900/40 transition hover:scale-[1.01] hover:shadow-xl hover:shadow-purple-900/50 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {isSubmitting ? "Signing in..." : "Sign in"}
+          {isSubmitting ? "מתחברים..." : "כניסה לחשבון"}
         </button>
         <button
           type="button"
         onClick={() => router.push(registerTarget)}
         className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
       >
-        Don't have an account? &nbsp;—&nbsp;Register
+        עדיין אין לכם חשבון? &nbsp;—&nbsp;להרשמה
       </button>
       </div>
     </AuthFormShell>

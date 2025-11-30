@@ -20,12 +20,12 @@ export function AuthFormShell({
   ...formProps
 }: AuthFormShellProps) {
   const baseClassName =
-    "relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl shadow-slate-950/30";
+    "relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl shadow-purple-950/20";
 
   return (
     <form {...formProps} className={className ? `${baseClassName} ${className}` : baseClassName}>
-      <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-emerald-400/40 via-teal-400/30 to-cyan-400/20 blur-3xl" />
-      <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-gradient-to-tr from-slate-900/80 via-slate-800/70 to-slate-700/60 blur-3xl" />
+      <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-rose-400/40 via-purple-400/30 to-indigo-400/20 blur-3xl" />
+      <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-gradient-to-tr from-purple-900/80 via-indigo-800/70 to-slate-800/60 blur-3xl" />
 
       <div className="relative space-y-2">
         <p className="text-sm font-medium text-teal-100/80">{eyebrow}</p>

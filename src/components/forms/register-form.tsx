@@ -47,27 +47,27 @@ function RegisterFormInner() {
     setSuccess(false);
 
     if (!registerPayload.username) {
-      setError("Username is required.");
+      setError("יש להזין שם משתמש.");
       return;
     }
 
     if (!registerPayload.email) {
-      setError("Email is required.");
+      setError("יש להזין אימייל.");
       return;
     }
 
     if (registerPayload.password.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setError("סיסמה חייבת להכיל לפחות 6 תווים.");
       return;
     }
 
     if (!registerPayload.full_name) {
-      setError("Full name is required.");
+      setError("יש להזין שם מלא.");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(registerPayload.email)) {
-      setError("Email format is invalid.");
+      setError("כתובת האימייל אינה תקינה.");
       return;
     }
 
@@ -80,8 +80,8 @@ function RegisterFormInner() {
     } catch (err) {
       const message =
         err instanceof Error
-          ? `Registration failed (${err.message})`
-          : "Unable to sign up. Please try again.";
+          ? `ההרשמה נכשלה (${err.message})`
+          : "לא הצלחנו להשלים הרשמה. נסו שוב.";
       setError(message);
     } finally {
       setIsSubmitting(false);
@@ -97,13 +97,13 @@ function RegisterFormInner() {
   return (
     <AuthFormShell
       onSubmit={handleSubmit}
-      eyebrow="Sign up"
-      title="Create your account"
-      description="Join Bankapp to access your dashboard, manage balances, cards, and transfers."
+      eyebrow="פתיחת חשבון"
+      title="ברוכים הבאים לבנק השחר"
+      description="הצטרפו לדיגיטל של בנק השחר כדי לנהל עו״ש, הלוואות והעברות במקום אחד."
       fields={
         <>
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Username</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>שם משתמש</span>
             <input
               type="text"
               autoComplete="username"
@@ -111,13 +111,13 @@ function RegisterFormInner() {
               onChange={(event) =>
                 setRegisterPayload((prev) => ({ ...prev, username: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
-              placeholder="choose a username"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
+              placeholder="בחרו שם משתמש"
             />
           </label>
 
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Email</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>אימייל</span>
             <input
               type="email"
               autoComplete="email"
@@ -125,13 +125,13 @@ function RegisterFormInner() {
               onChange={(event) =>
                 setRegisterPayload((prev) => ({ ...prev, email: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
-              placeholder="your email address"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
+              placeholder="הקלידו אימייל"
             />
           </label>
 
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Full Name</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>שם מלא</span>
             <input
               type="text"
               autoComplete="full-name"
@@ -139,13 +139,13 @@ function RegisterFormInner() {
               onChange={(event) =>
                 setRegisterPayload((prev) => ({ ...prev, full_name: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
-              placeholder="full name"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
+              placeholder="הקלידו שם מלא"
             />
           </label>
 
-          <label className="block space-y-2 text-sm font-medium text-slate-100">
-            <span>Password</span>
+          <label className="block space-y-2 text-sm font-medium text-slate-100 text-right">
+            <span>סיסמה</span>
             <input
               type="password"
               autoComplete="new-password"
@@ -153,22 +153,20 @@ function RegisterFormInner() {
               onChange={(event) =>
                 setRegisterPayload((prev) => ({ ...prev, password: event.target.value }))
               }
-              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-teal-300/70 focus:bg-white/15 focus:ring-2 focus:ring-teal-400/30"
-              placeholder="create a password"
+              className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white placeholder:text-slate-200/60 shadow-inner shadow-slate-900/20 outline-none transition focus:border-purple-200/80 focus:bg-white/15 focus:ring-2 focus:ring-rose-300/40"
+              placeholder="צרו סיסמה"
             />
           </label>
         </>
       }
     >
       {error && (
-        <p className="relative mt-4 text-sm font-medium text-rose-200">
-          {error}
-        </p>
+        <p className="relative mt-4 text-sm font-medium text-rose-200 text-right">{error}</p>
       )}
 
       {success && (
-        <p className="relative mt-4 text-sm font-medium text-emerald-200">
-          Account created! We'll redirect you to your dashboard shortly.
+        <p className="relative mt-4 text-sm font-medium text-emerald-200 text-right">
+          החשבון נוצר! מעבירים אתכם ללוח הבקרה.
         </p>
       )}
 
@@ -176,16 +174,16 @@ function RegisterFormInner() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="relative inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-teal-900/40 transition hover:scale-[1.01] hover:shadow-xl hover:shadow-teal-900/50 disabled:cursor-not-allowed disabled:opacity-70"
+          className="relative inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-700 via-rose-600 to-amber-400 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-900/40 transition hover:scale-[1.01] hover:shadow-xl hover:shadow-purple-900/50 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {isSubmitting ? "Signing you up..." : "Sign up"}
+          {isSubmitting ? "נרשמים..." : "פתיחת חשבון"}
         </button>
         <button
           type="button"
           onClick={goToLogin}
           className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
         >
-          Already have an account? Log in
+          כבר יש לכם חשבון? התחברות
         </button>
       </div>
     </AuthFormShell>
